@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,12 +19,13 @@ public class ArtiklService implements Service<Artikl>{
 		Connection conn = Connect.getConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs    = pstmt.executeQuery(sql);
+			ResultSet rs = pstmt.executeQuery();
 			
 			
 	            while (rs.next()) {
 	            	
 	            	artikl.setId(rs.getInt("id"));
+	            	artikl.setNaziv(rs.getString("naziv"));
 	                artikl.setNabavnaKolicina(rs.getInt("nabavnakolicina"));
 	                artikl.setTrenutnoStanje(rs.getInt("trenutnostanje"));
 	                artikl.setNabavnaCijena(rs.getDouble("nabavnacijena"));
@@ -36,13 +38,14 @@ public class ArtiklService implements Service<Artikl>{
 			e.printStackTrace();
 		}
         
+		Connect.closeConnection(conn);
 		return lista;
 	}
 
 	@Override
 	public void create(int role, Artikl artikl) {
 		if(role == 1 || role == 2) {
-			String sql = "INSERT INTO artikl(naziv, nabavnakolicina, trenutnostanje, "
+			String sql = "INSERT INTO artikl(id, naziv, nabavnakolicina, trenutnostanje, "
 					+ "nabavnacijena, prodajnacijena) VALUES(?,?,?,?,?,?)";
 			
 			Connection conn = Connect.getConnection();
@@ -54,12 +57,15 @@ public class ArtiklService implements Service<Artikl>{
 				pstmt.setInt(4, artikl.getTrenutnoStanje());
 				pstmt.setDouble(5, artikl.getNabavnaCijena());
 				pstmt.setDouble(6, artikl.getProdajnaCijena());
+				pstmt.executeUpdate();
 			} catch (SQLException e) {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
 			}
-			
+			Connect.closeConnection(conn);
 		}
+		
+		
 		
 	}
 
@@ -77,7 +83,7 @@ public class ArtiklService implements Service<Artikl>{
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		
+		Connect.closeConnection(conn);
 	}
 
 	@Override
@@ -94,9 +100,30 @@ public class ArtiklService implements Service<Artikl>{
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
-		
+		Connect.closeConnection(conn);
 	}
 
-	
+	@Override
+	public void createTable() {
+			String sql = "create table if not exists artikl(\n" + 
+					"	id int,\n" + 
+					"	naziv varchar(50),\n" + 
+					"	nabavnakolicina int,\n" + 
+					"	trenutnostanje int,\n" + 
+					"	nabavnacijena decimal(18,2),\n" + 
+					"	prodajnacijena decimal(18,2)\n" +  
+					");";
+			
+			Connection conn = Connect.getConnection();
+			try {
+				Statement statement = conn.createStatement();
+				statement.executeUpdate(sql);
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
+			
+		}
+
 	
 }

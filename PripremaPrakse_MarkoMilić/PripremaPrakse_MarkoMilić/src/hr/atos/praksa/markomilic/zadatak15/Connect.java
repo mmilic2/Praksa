@@ -18,6 +18,14 @@ public class Connect{
 		return conn;
 	}
 
-    
+	public static void closeConnection(Connection conn) {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 	
 }

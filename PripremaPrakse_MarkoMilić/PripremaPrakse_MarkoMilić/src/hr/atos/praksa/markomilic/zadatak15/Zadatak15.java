@@ -1,6 +1,8 @@
 package hr.atos.praksa.markomilic.zadatak15;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Zadatak15 {
@@ -10,53 +12,93 @@ public class Zadatak15 {
 		
 		Scanner userInput = new Scanner(System.in);
 		int choice = 0;
+		int role = 0;
 		do {
 			do {
-				System.out.println("Odaberite autorizacijsku razinu:\n"
-						+ "1.Admin:\n"
-						+ "2.Superuser:\n"
-						+ "3.User:\n");
-				choice = userInput.nextInt();
-			}while(choice != 1 && choice != 2 && choice != 3);
+				Menu.odaberiAutorizaciju();
+				role = userInput.nextInt();
+			}while(role != 1 && role != 2 && role != 3);
 			
-			switch(choice) {
+			switch(role) {
 				
 				case 1:{
 					do {
-						System.out.println("Odaberite opciju:\n"
-								+ "1.Kreiraj artikl:\n"
-								+ "2.Izlistaj artikl:\n"
-								+ "3.Izmijeni artikl:\n"
-								+ "4.Brisanje artikla:\n"
-								+ "5.Kreiraj zaposlenika:\n"
-								+ "6.Brisanje zaposlenika:\n"
-								+ "7.Izmijeni zaposlenika:\n"
-								+ "8.Izlistaj zaposlenike:\n");
+						Menu.odaberiOpciju(choice);
 						choice = userInput.nextInt();
 					}while(choice < 1 && choice > 8);
+					
+					switch(choice) {
+					case 1:{
+						break;
+					}
+					case 2:{
+						break;
+					}
+					case 3:{
+						Artikl noviArtikl = new Artikl(1,"cokolada",5,5,5.0,5.0);
+						ArtiklService as = new ArtiklService();
+						List<Artikl> lista= new ArrayList<Artikl>();
+						as.createTable();
+						as.create(role, noviArtikl);
+						lista = as.getAll();
+						for (Artikl artikl : lista) {
+							System.out.println(artikl.getNaziv());
+						}
+						break;
+					}
+					case 4:{
+						break;
+					}
+					case 5:{
+						break;
+					}
+					case 6:{
+						break;
+					}
+					case 7:{
+						break;
+					}
+					case 8:{
+						break;
+					}
+					}
 					
 					break;
 				}
 				case 2:{
 					do {
-						System.out.println("Odaberite opciju:\n"
-								+ "1.Kreiraj artikl:\n"
-								+ "2.Izlistaj artikl:\n"
-								+ "3.Kreiraj zaposlenika:\n"
-								+ "4.Izlistaj zaposlenike:\n");
+						Menu.odaberiOpciju(choice);
 						choice = userInput.nextInt();
 					}while(choice < 1 && choice > 4);
-					
+					switch(choice) {
+					case 1:{
+						break;
+					}
+					case 2:{
+						break;
+					}
+					case 3:{
+						break;
+					}
+					case 4:{
+						break;
+					}
+					}
 					break;
 				}
 				case 3:{
 					do {
-						System.out.println("Odaberite opciju:\n"
-								+ "1.Izlistaj artikl:\n"
-								+ "2.Izlistaj zaposlenike:\n");
+						Menu.odaberiOpciju(choice);
 						choice = userInput.nextInt();
 					}while(choice != 1 && choice != 2);
-					
+					switch(choice) {
+					case 1:{
+						break;
+					}
+					case 2:{
+						break;
+					}
+					}
 					break;
 				}
 			}
@@ -64,6 +106,7 @@ public class Zadatak15 {
 			choice = userInput.nextInt();
 		}while(choice ==1);
 		userInput.close();
+
 
 	}
 	

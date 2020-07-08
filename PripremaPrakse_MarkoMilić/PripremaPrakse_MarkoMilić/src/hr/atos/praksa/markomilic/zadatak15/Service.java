@@ -8,5 +8,6 @@ public interface Service<T> {
 	public void create(int role, Artikl artikl);
 	public void update(int role, Artikl artikl);
 	public void delete(int role, Artikl artikl);
+	public void createTable();
 	
 }

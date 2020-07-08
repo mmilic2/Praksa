@@ -16,15 +16,20 @@ public class Artikl {
 	public Artikl() {
 	}
 
-	public Artikl(String naziv, Integer nabavnaKolicina, Integer trenutnoStanje, Double nabavnaCijena,
+	
+	
+	public Artikl(int id, String naziv, Integer nabavnaKolicina, Integer trenutnoStanje, Double nabavnaCijena,
 			Double prodajnaCijena) {
+		this.id = id;
 		this.naziv = naziv;
 		this.nabavnaKolicina = nabavnaKolicina;
 		this.trenutnoStanje = trenutnoStanje;
 		this.nabavnaCijena = nabavnaCijena;
 		this.prodajnaCijena = prodajnaCijena;
 	}
-	
+
+
+
 	public int getId() {
 		return id;
 	}
