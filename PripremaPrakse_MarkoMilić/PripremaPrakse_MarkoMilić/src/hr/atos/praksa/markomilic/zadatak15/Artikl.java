@@ -13,6 +13,9 @@ public class Artikl {
 	
 	
 	
+	public Artikl() {
+	}
+
 	public Artikl(String naziv, Integer nabavnaKolicina, Integer trenutnoStanje, Double nabavnaCijena,
 			Double prodajnaCijena) {
 		this.naziv = naziv;

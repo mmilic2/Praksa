@@ -2,15 +2,41 @@ package hr.atos.praksa.markomilic.zadatak15;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArtiklService implements Service<Artikl>{
 
 	@Override
 	public List<Artikl> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT id, naziv, nabavnakolicina, trenutnostanje,"
+				+ " nabavnacijena, prodajnacijena FROM artikl";
+		List<Artikl> lista = new ArrayList<Artikl>();
+		Artikl artikl = new Artikl();
+		Connection conn = Connect.getConnection();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs    = pstmt.executeQuery(sql);
+			
+			
+	            while (rs.next()) {
+	            	
+	            	artikl.setId(rs.getInt("id"));
+	                artikl.setNabavnaKolicina(rs.getInt("nabavnakolicina"));
+	                artikl.setTrenutnoStanje(rs.getInt("trenutnostanje"));
+	                artikl.setNabavnaCijena(rs.getDouble("nabavnacijena"));
+	                artikl.setProdajnaCijena(rs.getDouble("prodajnacijena"));
+	                lista.add(artikl);
+	            }
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+        
+		return lista;
 	}
 
 	@Override
