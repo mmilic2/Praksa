@@ -1,0 +1,3 @@
+INDEX VERSION 1.131+C:\Users\marko\Desktop\PripremaPrakse_MarkoMili?\.metadata\.plugins\org.eclipse.jdt.core
+789344348.index
+2774071702.index

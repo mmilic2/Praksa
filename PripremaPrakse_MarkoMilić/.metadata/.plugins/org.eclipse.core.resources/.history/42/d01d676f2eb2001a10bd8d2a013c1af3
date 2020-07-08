@@ -1,0 +1,5 @@
+package hr.atos.praksa.markomilic.zadatak13;
+
+public interface Zivotinja {
+
+}

@@ -1,0 +1,16 @@
+package hr.atos.praksa.markomilic.zadatak12;
+
+public class Zadatak11 {
+
+	public Zadatak11() {
+		
+		
+		
+	}
+	
+	public static void main(String[] args) {
+		new Zadatak11();
+
+	}
+
+}

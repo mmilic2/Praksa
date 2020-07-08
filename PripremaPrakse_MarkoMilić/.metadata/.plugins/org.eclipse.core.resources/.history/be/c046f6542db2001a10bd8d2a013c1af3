@@ -1,0 +1,62 @@
+package hr.atos.praksa.markomilic.zadatak10;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+
+
+public class Zadatak10 {
+
+	public Zadatak10() {
+		
+		String putanja = JOptionPane.showInputDialog("Unesite putanju:");
+		String fraza = JOptionPane.showInputDialog("Unesite frazu:");
+		
+		File direktorij = new File(putanja);
+		FilenameFilter filter = new FilenameFilter() {
+			
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".txt");
+			}
+		};
+		String[] privremena = direktorij.list(filter);
+		if(privremena == null) {
+			System.out.println("Greska");
+		}else {
+			System.out.println("Datoteke koje zavrsavaju sa .txt: ");
+			for(int i=0;i<privremena.length;i++) {
+				System.out.println(privremena[i]);
+			}
+		}
+		System.out.println();
+		String data;
+		Scanner myReader
+		for(int i=0;i<privremena.length;i++) {
+			File myObj = new File(putanja+"\\"+privremena[i]);
+			try {
+				myReader = new Scanner(myObj);
+				while(myReader.hasNextLine()) {
+					data = myReader.nextLine();
+					if(data.contentEquals(fraza)) {
+						System.out.println("Fraza se nalazi u datoteci: " + privremena[i]);
+						System.out.println(data);
+					}
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		new Zadatak10();
+	}
+	
+}
