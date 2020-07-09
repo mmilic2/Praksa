@@ -7,15 +7,18 @@ public class Zaposlenik {
 	private String prezime;
 	private String radnoMjesto;
 	private String oib;
-	
-	
-	public Zaposlenik(String ime, String prezime, String radnoMjesto, String oib) {
+
+	public Zaposlenik(int id, String ime, String prezime, String radnoMjesto, String oib) {
+		this.id = id;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.radnoMjesto = radnoMjesto;
 		this.oib = oib;
 	}
-	
+
+	public Zaposlenik() {
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -27,28 +30,33 @@ public class Zaposlenik {
 	public String getIme() {
 		return ime;
 	}
+
 	public void setIme(String ime) {
 		this.ime = ime;
 	}
+
 	public String getPrezime() {
 		return prezime;
 	}
+
 	public void setPrezime(String prezime) {
 		this.prezime = prezime;
 	}
+
 	public String getRadnoMjesto() {
 		return radnoMjesto;
 	}
+
 	public void setRadnoMjesto(String radnoMjesto) {
 		this.radnoMjesto = radnoMjesto;
 	}
+
 	public String getOib() {
 		return oib;
 	}
+
 	public void setOib(String oib) {
 		this.oib = oib;
 	}
-	
-	
-	
+
 }

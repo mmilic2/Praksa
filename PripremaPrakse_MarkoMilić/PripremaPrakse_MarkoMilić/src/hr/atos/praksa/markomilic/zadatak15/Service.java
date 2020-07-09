@@ -5,9 +5,11 @@ import java.util.List;
 public interface Service<T> {
 
 	public List<T> getAll();
-	public void create(int role, Artikl artikl);
-	public void update(int role, Artikl artikl);
-	public void delete(int role, Artikl artikl);
-	public void createTable();
-	
+
+	public void create(T myObject);
+
+	public void update(T myObject);
+
+	public void delete(int id);
+
 }
