@@ -35,13 +35,12 @@ public class TestZaposlenikService {
 				String oib = "12345";
 				
 				Zaposlenik zaposlenik = new Zaposlenik(id, ime, prezime, radnomjesto, oib);
-				zs.create(zaposlenik);
+				zs.create(zaposlenik,conn);
 				assertEquals(id, zaposlenik.getId());
 				assertEquals(ime, zaposlenik.getIme());
 				assertEquals(prezime, zaposlenik.getPrezime());
 				assertEquals(radnomjesto, zaposlenik.getRadnoMjesto());
 				assertEquals(oib, zaposlenik.getOib());
-				
 				
 				try(ResultSet rs = stCheck.executeQuery("SELECT * FROM zaposlenik")) {
 					

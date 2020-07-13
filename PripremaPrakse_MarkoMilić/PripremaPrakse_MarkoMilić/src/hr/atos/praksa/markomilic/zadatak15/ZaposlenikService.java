@@ -37,10 +37,10 @@ public class ZaposlenikService implements Service<Zaposlenik> {
 	}
 
 	@Override
-	public void create(Zaposlenik zaposlenik) {
+	public void create(Zaposlenik zaposlenik, Connection conn) {
 		String sql = "INSERT INTO zaposlenik(id, ime, prezime, radnomjesto, " + "oib) VALUES(?,?,?,?,?)";
 
-		Connection conn = Connect.getConnection();
+		//Connection conn = Connect.getConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, zaposlenik.getId());
