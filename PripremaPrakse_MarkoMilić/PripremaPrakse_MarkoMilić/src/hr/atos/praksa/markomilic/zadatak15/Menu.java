@@ -1,5 +1,10 @@
 package hr.atos.praksa.markomilic.zadatak15;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,12 +19,17 @@ public class Menu {
 		String superuser = "3.Kreiraj artikl:\n" + "4.Kreiraj zaposlenika:\n";
 		String admin = "5.Izmijeni artikl:\n" + "6.Brisanje artikla:\n" + "7.Izmijeni zaposlenika:\n"
 				+ "8.Brisanje zaposlenika:\n";
-		if (choice == 1)
-			System.out.println(user + superuser + admin);
-		else if (choice == 2)
-			System.out.println(user + superuser);
-		else
+		String dodatnaDva = "9. Izlistaj broj zaposlenika po radnom mjestu:\n"
+				+ "10. Izlistaj ukupni profit za artikle";
+		if (choice == 1) {
+			System.out.println(user + superuser + admin + dodatnaDva);
+		}
+		else if (choice == 2) {
+			System.out.println(user + superuser + dodatnaDva);
+		}
+		else {
 			System.out.println(user);
+		}
 	}
 
 	public static Artikl napraviArtikl(Scanner userInput) {
@@ -95,4 +105,52 @@ public class Menu {
 		zs.delete(obrisiId);
 	}
 
+	public static void izmjeniZaposlenika(List<Zaposlenik>list ,Zaposlenik z, ZaposlenikService zs,Scanner userInput) {
+		izlistajZaposlenike(list,zs);
+		z=napraviZaposlenika(userInput);
+		zs.update(z);
+	}
+
+	public static void izmjeniArtikl(List<Artikl>lista, Artikl a,ArtiklService as,Scanner userInput) {
+		Menu.izlistajArtikle(lista,as);
+		a=Menu.napraviArtikl(userInput);
+		as.update(a);
+		System.out.println("Artikl izmjenjen");
+	}
+
+	public static void izlistajPoRadnomMjestu() {
+		
+		String sql = "SELECT radnomjesto, count(oib) from zaposlenik group by radnomjesto";
+		Connection conn = Connect.getConnection();
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				System.out.println(rs.getInt("count(oib)") +" "+ rs.getString("radnomjesto"));
+				
+			}
+
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void izracunajProfit(List<Artikl>lista,ArtiklService as) {
+		lista=as.getAll();
+		double ukupniProfit = 0;
+		double profitPoArtiklu = 0;
+		int prodanaKolicina = 0;
+		for(Artikl ar:lista) {
+			prodanaKolicina = ar.getNabavnaKolicina()-ar.getTrenutnoStanje();
+			profitPoArtiklu = prodanaKolicina*ar.getProdajnaCijena()-prodanaKolicina*ar.getNabavnaCijena();
+			ukupniProfit += profitPoArtiklu;
+		}
+		System.out.println("Ukupni profit iznosi: "+ ukupniProfit);
+		
+	}
+
+	
+	
 }

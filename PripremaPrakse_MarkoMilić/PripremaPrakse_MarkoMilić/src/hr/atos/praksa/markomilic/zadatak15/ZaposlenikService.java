@@ -13,14 +13,14 @@ public class ZaposlenikService implements Service<Zaposlenik> {
 	public List<Zaposlenik> getAll() {
 		String sql = "SELECT id, ime, prezime, radnomjesto," + " oib FROM zaposlenik";
 		List<Zaposlenik> lista = new ArrayList<Zaposlenik>();
-		Zaposlenik zaposlenik = new Zaposlenik();
+		Zaposlenik zaposlenik;
 		Connection conn = Connect.getConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+				zaposlenik = new Zaposlenik();
 				zaposlenik.setId(rs.getInt("id"));
 				zaposlenik.setIme(rs.getString("ime"));
 				zaposlenik.setPrezime(rs.getString("prezime"));

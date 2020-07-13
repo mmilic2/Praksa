@@ -50,8 +50,7 @@ public class Zadatak15 {
 					break;
 				}
 				case 5: {
-					noviArtikl = Menu.napraviArtikl(userInput);
-					as.update(noviArtikl);
+					Menu.izmjeniArtikl(listaArtikla, noviArtikl, as, userInput);
 					break;
 				}
 				case 6: {
@@ -59,20 +58,29 @@ public class Zadatak15 {
 					break;
 				}
 				case 7: {
-					
+					Menu.izmjeniZaposlenika(listaZaposlenika, noviZaposlenik, zs, userInput);
 					break;
 				}
 				case 8: {
 					Menu.obrisiZaposlenika(listaZaposlenika, zs, userInput);
 					break;
 				}
+				case 9:{
+					Menu.izlistajPoRadnomMjestu();
+					break;
+				}
+				case 10:{
+					Menu.izracunajProfit(listaArtikla, as);
+					break;
+				}
+
 				}
 
 				break;
 			}
 			case 2: {
 				do {
-					Menu.odaberiOpciju(choice);
+					Menu.odaberiOpciju(role);
 					choice = userInput.nextInt();
 				} while (choice < 1 && choice > 4);
 				switch (choice) {
@@ -85,9 +93,19 @@ public class Zadatak15 {
 					break;
 				}
 				case 3: {
+					Menu.unesiArtikl(noviArtikl, as, userInput);
 					break;
 				}
 				case 4: {
+					Menu.unesiZaposlenika(noviZaposlenik, zs, userInput);;
+					break;
+				}
+				case 9:{
+					Menu.izlistajPoRadnomMjestu();
+					break;
+				}
+				case 10:{
+					Menu.izracunajProfit(listaArtikla, as);
 					break;
 				}
 				}
@@ -95,7 +113,7 @@ public class Zadatak15 {
 			}
 			case 3: {
 				do {
-					Menu.odaberiOpciju(choice);
+					Menu.odaberiOpciju(role);
 					choice = userInput.nextInt();
 				} while (choice != 1 && choice != 2);
 				switch (choice) {
@@ -104,6 +122,7 @@ public class Zadatak15 {
 					break;
 				}
 				case 2: {
+					Menu.izlistajZaposlenike(listaZaposlenika, zs);
 					break;
 				}
 				}

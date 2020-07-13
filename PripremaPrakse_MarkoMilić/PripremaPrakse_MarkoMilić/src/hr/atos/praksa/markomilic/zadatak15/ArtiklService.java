@@ -14,14 +14,14 @@ public class ArtiklService implements Service<Artikl> {
 		String sql = "SELECT id, naziv, nabavnakolicina, trenutnostanje,"
 				+ " nabavnacijena, prodajnacijena FROM artikl";
 		List<Artikl> lista = new ArrayList<Artikl>();
-		Artikl artikl = new Artikl();
+		Artikl artikl;
 		Connection conn = Connect.getConnection();
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-
+				artikl = new Artikl();
 				artikl.setId(rs.getInt("id"));
 				artikl.setNaziv(rs.getString("naziv"));
 				artikl.setNabavnaKolicina(rs.getInt("nabavnakolicina"));
